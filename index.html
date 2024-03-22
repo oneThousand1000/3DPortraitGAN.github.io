@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A 3D-aware one-quarter headshot GAN framework that can learn 360° canonical 3D portrait distribution from the proposed dataset with body pose self-learning. ">
+  <meta name="keywords" content="Portrait generation, 3D-aware GANs">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3DPortraitGAN: Learning Canonical Full-Head 3D GANs from a Single-View Portrait Dataset with Diverse Body Poses</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/1f638.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+           <a class="navbar-item" href="https://onethousandwu.com/LPFF.github.io/">
+            LPFF
+          </a>
+          <a class="navbar-item" href="https://onethousandwu.com/HairMapper.github.io/">
+            HairMapper
+          </a>
+          <a class="navbar-item" href="https://onethousandwu.com/doublechinremoval.github.io/">
+            DoubleChin removal
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title"><span class="dnerf">3DPortraitGAN </span>: <br /> Learning Canonical Full-Head 3D GANs <br /> from a Single-View Portrait Dataset <br />  with Diverse Body Poses</h1>
+           <div class="is-size-3 publication-conf">
+
+            <span><b>Arxiv</b></span>
+            </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://onethousandwu.com/">Yiqian Wu</a><sup>1</sup>,</span>
+           <span class="author-block">
+              <a href="https://xh38.github.io/">Hao Xu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://yuyujunjun.github.io/">Xiangjun Tang</a><sup>1</sup>,
+            <span class="author-block">
+              <a href="http://sweb.cityu.edu.hk/hongbofu/publications.html">Hongbo Fu</a><sup>2</sup>,
+             <span class="author-block">
+              <a href="http://www.cad.zju.edu.cn/home/jin/">Xiaogang Jin*</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>State Key Lab of CAD&CG, Zhejiang University,</span>
+            <span class="author-block"><sup>2</sup>City University of Hong Kong </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2307.14770"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Arxiv)</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="http://www.cad.zju.edu.cn/home/jin/sig2021/demo.mp4"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-youtube"></i>-->
+<!--                  </span>-->
+<!--                  <span>Video</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/oneThousand1000/3DPortraitGAN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/oneThousand1000/3DPortraitGAN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <figure class="image">
+            <img src="./static/images/teaser.jpeg" alt="teaser">
+          </figure>
+      <h2 class="subtitle has-text-centered">
+       Our 3DPortraitGAN can generate one-quarter headshot 3D avatars and output portrait images (a and d)
+        of a single identity using camera poses and body poses from reference images (c and f). The real
+        reference images (c and f) are sampled from our 360°PHQ dataset. We demonstrate that
+        3DPortraitGAN can generate canonical portrait images from all camera angles by showcasing
+        the 360° yaw angle exploration results in (g).
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/large_pose_0_x264.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/small_pose_0_x264.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/large_pose_1_x264.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/small_pose_1_x264.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D-aware face generators are typically trained on 2D real-life face image datasets 
+            that primarily consist of near-frontal face data, and as such, they are unable to 
+            construct one-quarter headshot 3D portraits with complete head, neck, and shoulder 
+            geometry. Two reasons account for this issue: First, existing facial recognition 
+            methods struggle with extracting facial data captured from large camera angles or 
+            back views. Second, it is challenging to learn a distribution of 3D portraits 
+            covering the one-quarter headshot region from single-view data due to significant
+            geometric deformation caused by diverse body poses. 
+          </p>
+          <p>
+           To this end, we first create the dataset 360°PHQ-Portrait-HQ (360°PHQ} for short) 
+            which consists of high-quality single-view real portraits annotated with a variety
+            of camera parameters (the yaw angles span the entire 360° range) and body poses. 
+            We then propose 3DPortraitGAN, the first 3D-aware one-quarter headshot portrait 
+            generator that learns a canonical 3D avatar distribution from the 360°PHQ dataset
+            with body pose self-learning. Our model can generate view-consistent portrait
+            images from all camera angles with a canonical one-quarter headshot 3D representation.
+
+          </p>
+          <p>
+            Our experiments show that the proposed framework can accurately predict portrait body
+            poses and generate view-consistent, realistic portrait images with complete geometry
+            from all camera angles.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--        <h2 class="title is-3">Video</h2>-->
+<!--        <div class="publication-video">-->
+<!--          <iframe src="https://www.youtube.com/embed/1aYPceNkwIQ?rel=0&amp;showinfo=0"-->
+<!--                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <!--/ Paper video. -->
+
+        <!-- Pipeline. -->
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Pipeline</h2>
+        <div class="content has-text-justified">
+          <p>
+           Our image generation pipeline.
+          </p>
+          <figure class="image">
+            <img src="./static/images/pipeline.png" alt="Pipeline">
+          </figure>
+        </div>
+      </div>
+
+
+
+    <!--/ Pipeline. -->
+
+
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{wu20233dportraitgan,
+      title={3DPortraitGAN: Learning One-Quarter Headshot 3D GANs from a Single-View Portrait Dataset with Diverse Body Poses},
+      author={Yiqian Wu and Hao Xu and Xiangjun Tang and Hongbo Fu and Xiaogang Jin},
+      year={2023},
+      eprint={2307.14770},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+           This page is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">source code</a>. We thank the author for sharing it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
